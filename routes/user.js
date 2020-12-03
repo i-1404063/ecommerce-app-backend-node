@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const AsyncHandler = require("express-async-handler");
-const { data } = require("../data.js");
+// const users = require("../config/user");
 const auth = require("../middleware/auth");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
@@ -9,14 +9,14 @@ const mongoose = require("mongoose");
 
 const router = express.Router();
 
-router.get(
-  "/seed",
-  AsyncHandler(async (req, res) => {
-    await User.remove({});
-    const createdUsers = await User.insertMany(data.users);
-    res.send({ createdUsers });
-  })
-);
+// router.get(
+//   "/seed",
+//   AsyncHandler(async (req, res) => {
+//     // await User.remove({});
+//     const createdUsers = await User.insertMany(users);
+//     res.send({ createdUsers });
+//   })
+// );
 
 router.get(
   "/:id",
@@ -60,7 +60,7 @@ router.post(
       user = new User({
         name: req.body.name,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, bcrypt.genSalt(10)),
+        password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
       });
 
       user = await user.save();

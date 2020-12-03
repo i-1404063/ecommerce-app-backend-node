@@ -22,7 +22,7 @@ userSchema.methods.generateToken = function () {
       isAdmin: this.isAdmin,
     },
     process.env.SECRET_KEY,
-    { expiresIn: "2d" }
+    { expiresIn: "12h" }
   );
 };
 

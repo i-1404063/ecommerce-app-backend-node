@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { data } = require("../data");
+const dataProducts = require("../config/data");
 const AsyncHandler = require("express-async-handler");
 const Product = require("../models/product");
 
@@ -12,14 +12,14 @@ router.get(
   })
 );
 
-router.get(
-  "/seed",
-  AsyncHandler(async (req, res) => {
-    // await Product.remove({});
-    const createdProducts = await Product.insertMany(data.products);
-    res.send({ createdProducts });
-  })
-);
+// router.get(
+//   "/seed",
+//   AsyncHandler(async (req, res) => {
+//     await Product.remove({});
+//     const createdProducts = await Product.insertMany(dataProducts);
+//     res.send({ createdProducts });
+//   })
+// );
 
 router.get(
   "/:id",
